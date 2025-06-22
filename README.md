@@ -55,6 +55,8 @@ This repository contains the code and documentation for an AI-powered Agricultur
 
 Note: Low metric scores suggest the model’s current limitations, attributed to T5-small’s capacity and the reduced dataset size after deduplication. Future improvements are outlined in the Future Work section.
 
+## Deployed link and Video link: https://docs.google.com/document/d/1zxgSkirN0TaLzGcgyL4LFNXyzUNIetvXYgNzzPS9qlU/edit?usp=sharing
+
 
 ### Prerequisites
 
