@@ -1,0 +1,16 @@
+transformers>=4.40.0
+datasets
+tensorflow>=2.12
+gradio
+scikit-learn
+pandas
+numpy
+matplotlib
+tqdm
+gradio==3.16.2
+transformers==4.20.0
+tensorflow==2.9.0
+pandas==1.5.3
+scikit-learn==1.2.2
+rouge-score==0.1.2
+nltk==3.8.1
