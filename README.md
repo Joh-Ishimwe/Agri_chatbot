@@ -33,24 +33,25 @@ This repository contains the implementation of an AI-powered Agricultural Chatbo
 
   ### Hyperparameter Tuning Results
 
-| Experiment | Learning Rate | Batch Size | Epochs | Val Loss | Val Accuracy | Improvement |
-|------------|---------------|------------|--------|----------|---------------|-------------|
-| Baseline   | 0.0003        | 8          | 5      | 1.550    | 0.7473        | 0%          |
-| Exp 1      | 0.0003        | 16         | 5      | 1.610    | 0.7355        | -9.63%      |
-| Exp 2      | 0.0003        | 8          | 20     | 1.279    | 0.7647        | 17.45%      |
-| **Best**   | **0.0002**    | **4**      | **30** | **1.216**| **0.7736**    | **21.53%**  |
+| Experiment | Learning Rate | Batch Size | Epochs | Val Loss | Train Loss | Val Accuracy | Train Accuracy | Improvement Over Baseline |
+|------------|---------------|------------|--------|----------|------------|---------------|----------------|----------------------------|
+| 0 (Baseline) | 0.00003      | 8          | 5      | 1.5693   | 1.7723     | 0.7437        | 0.7189         | 0.00%                      |
+| 1          | 0.00003        | 16         | 5      | 1.6833   | 2.0990     | 0.7358        | 0.6811         | -7.26%                     |
+| 2          | 0.00003        | 8          | 20     | 1.2800   | 1.3802     | 0.7648        | 0.7526         | 18.43%                     |
+| 3 (Best)   | 0.00002        | 4          | 30     | 1.2175   | 1.2782     | 0.7733        | 0.7650         | 22.42%                     |
 
-The best-performing configuration (learning rate = 2e-5, batch size = 4, epochs = 30) achieved a validation accuracy of 77.36% with a 21.53% improvement over the baseline. Lower learning rate and smaller batch size allowed for more stable convergence, and extended training (30 epochs) helped the model generalise better.
+
+The best-performing configuration (learning rate = 2e-5, batch size = 4, epochs = 30) achieved a validation accuracy of 77.33% with a 22.42% improvement over the baseline. Lower learning rate and smaller batch size allowed for more stable convergence, and extended training (30 epochs) helped the model generalise better.
 
 
   ### Performance Metrics (best-performing model)
 
 | Metric       | Value     | Interpretation                            |
 |--------------|-----------|--------------------------------------------|
-| ROUGE-L      | 0.0507    | Low structural overlap with reference text |
-| BLEU         | 0.0804    | Limited n-gram overlap in generation       |
-| Val Accuracy | 0.7736    | From best configuration                    |
-| Val Loss     | 21.53%  | Improved from baseline after tuning        |
+| ROUGE-L      | 0.0400    | Low structural overlap with reference text |
+| BLEU         |  0.0104    | Limited n-gram overlap in generation       |
+| Val Accuracy | 0.765015     | From best configuration                    |
+| Val Loss     | 22.4695%  | Improved from baseline after tuning        |
 
 While the model achieved notable gains in validation accuracy, the low ROUGE-L and BLEU scores suggest that responses are fluent but often generic. This both maybe been caused by the limited training data (~2,300 unique pairs) and the modest capacity of T5-small. Future improvements may benefit from larger models and richer data.
 
