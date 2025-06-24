@@ -1,85 +1,98 @@
-# Agricultural Chatbot using Generative QA
-
-This repository contains the code and documentation for an AI-powered Agricultural Chatbot designed to assist farmers with queries on crop diseases, pest control, weather, and sustainable farming practices. Built using the T5-small Transformer model and fine-tuned on the KisanVaani dataset, the chatbot provides domain-specific answers through a user-friendly Gradio interface.
-
-## Project Overview
-
-**Purpose**: To provide accessible agricultural knowledge to farmers, especially in rural areas, enhancing decision-making and productivity.
-**Model**: T5-small, a compact Transformer model fine-tuned for generative question-answering (QA).
-**Dataset**: KisanVaani/agriculture-qa-english-only, containing 22,615 English question-answer pairs.
-**Interface**: Gradio, offering an intuitive UI with chat history, example questions, and clear instructions.
-
-## Dataset
-
-- The chatbot is trained on the KisanVaani/agriculture-qa-english-only dataset from Hugging Face.
+# 🌾 Agricultural Chatbot using Generative QA
+![Gradio Chatbot UI](https://drive.google.com/uc?export=view&id=1SMfbClo5ihUgZIFW0YQ2JPgBzEfSfBqM)
+![-](https://drive.google.com/uc?export=view&id=1f04Yx7NHeIhAjyhmA_UnUiDy6C0f_uw4)
 
 
 
+This repository contains the implementation of an AI-powered Agricultural Chatbot designed to assist farmers with queries on crop diseases, pest control, soil fertility, and sustainable farming practices. Built using the T5-small Transformer model and fine-tuned on a domain-specific dataset, the chatbot provides contextual answers through a seamless Gradio-based interface.
+
+---
+
+##  Project Overview
+
+- **Purpose**: Bridge the information gap for farmers, especially in rural areas, by offering timely and accessible agricultural knowledge.
+- **Model**: T5-small fine-tuned on domain-specific agricultural QA data.
+- **Dataset**: [KisanVaani/agriculture-qa-english-only](https://huggingface.co/datasets/KisanVaani/agriculture-qa-english-only) — 22,615 QA pairs (reduced to ~2,331 unique after deduplication).
+- **Interface**: [Gradio](https://gradio.app/) web UI for natural, interactive chatbot conversations.
+
+---
+
+### Dataset
+
+1. Source: Hugging Face Datasets Hub
+
+2. Size: 22,615 QA pairs (reduced to ~2,331 unique pairs after deduplication)
+
+3. Structure: question and answers
+4. Content Coverage: Crop diseases, pest control, soil health, organic farming, weather considerations.
+
+5. Limitations:
+
+- Reduced diversity after duplicate removal
 
 
-- Size: 22,615 question-answer pairs (reduced to ~2,331 unique pairs after deduplication).
+  ### Hyperparameter Tuning Results
+
+| Experiment | Learning Rate | Batch Size | Epochs | Val Loss | Val Accuracy | Improvement |
+|------------|---------------|------------|--------|----------|---------------|-------------|
+| Baseline   | 0.0003        | 8          | 5      | 1.550    | 0.7473        | 0%          |
+| Exp 1      | 0.0003        | 16         | 5      | 1.610    | 0.7355        | -9.63%      |
+| Exp 2      | 0.0003        | 8          | 20     | 1.279    | 0.7647        | 17.45%      |
+| **Best**   | **0.0002**    | **4**      | **30** | **1.216**| **0.7736**    | **21.53%**  |
+
+The best-performing configuration (learning rate = 2e-5, batch size = 4, epochs = 30) achieved a validation accuracy of 77.36% with a 21.53% improvement over the baseline. Lower learning rate and smaller batch size allowed for more stable convergence, and extended training (30 epochs) helped the model generalise better.
 
 
+  ### Performance Metrics (best-performing model)
 
-- Structure: Two columns: question (e.g., "How to control pests on maize?") and answers (e.g., "Use organic pesticides like neem oil.").
+| Metric       | Value     | Interpretation                            |
+|--------------|-----------|--------------------------------------------|
+| ROUGE-L      | 0.0507    | Low structural overlap with reference text |
+| BLEU         | 0.0804    | Limited n-gram overlap in generation       |
+| Val Accuracy | 0.7736    | From best configuration                    |
+| Val Loss     | 21.53%  | Improved from baseline after tuning        |
 
+While the model achieved notable gains in validation accuracy, the low ROUGE-L and BLEU scores suggest that responses are fluent but often generic. This both maybe been caused by the limited training data (~2,300 unique pairs) and the modest capacity of T5-small. Future improvements may benefit from larger models and richer data.
 
+### Example Conversation
+- User: "How to control pests on maize?"
+- Chatbot: "Use pesticides."
 
-- Content: Covers agricultural topics like crop diseases, pest management, soil fertility, and farming practices.
+- Response is correct, but may lack specific detail. (Future goal: make answers more targeted)
 
+---
 
+###  Deployment
 
-- Limitations: English-only, potentially limiting use in multilingual regions; reduced diversity due to high duplicate count.
+Deployed via Hugging Face Spaces.
 
-- Performance Metrics
+ [Live Chatbot Demo](https://docs.google.com/document/d/1zxgSkirN0TaLzGcgyL4LFNXyzUNIetvXYgNzzPS9qlU/edit?usp=sharing)
 
-- The fine-tuned T5-small model was evaluated using standard NLP metrics and qualitative testing:
+ 
+###  Video
 
+A Walkthrough Video presentation.
 
-
-
-
-- ROUGE-L: 0.0507, indicating low structural similarity with reference answers due to generic responses.
-
-
-
-- BLEU: 0.0804, showing limited n-gram overlap, reflecting challenges in capturing precise agricultural details.
-
-
-
-- Validation Accuracy: 0.7736 (best configuration), with a 21.53% improvement in validation loss over the baseline.
-
-
-
-- Qualitative Findings: Responses are fluent but often generic or lack specific details, as seen in example conversations below.
-
-Note: Low metric scores suggest the model’s current limitations, attributed to T5-small’s capacity and the reduced dataset size after deduplication. Future improvements are outlined in the Future Work section.
-
-### Deployed link and Video link: https://docs.google.com/document/d/1zxgSkirN0TaLzGcgyL4LFNXyzUNIetvXYgNzzPS9qlU/edit?usp=sharing
+ [Video](https://docs.google.com/document/d/1zxgSkirN0TaLzGcgyL4LFNXyzUNIetvXYgNzzPS9qlU/edit?usp=sharing)
 
 
-### Prerequisites
+---
 
+##  Setup Instructions
 
-
-
-
+### 🔧 Prerequisites
 - Python 3.8+
+- pip
+- TensorFlow >= 2.11
+- Internet connection
 
+### Clone & Install
+```bash
+git clone https://github.com/Joh-Ishimwe/Agri_chatbot.git
+cd Agri_chatbot
+pip install -r requirements.txt
 
-
-- GPU (optional, recommended for faster training; Google Colab compatible)
-
-
-
-- Internet access (to download dataset and pre-trained model)
-
-- Setup Instructions
-
-- Follow these steps to set up and run the chatbot locally or on Google Colab.
-
-
-
+```
 
 
 1. Clone the Repository:
@@ -97,22 +110,28 @@ cd agri-chatbot
 
    `df = pd.read_parquet("hf://datasets/KisanVaani/agriculture-qa-english-only/data/train-00000-of-00001.parquet")`
 
-5. Run the Jupyter Notebook cells
-6. Launch the Gradio Interface:
-   - The final cells in the notebook start the Gradio UI. Access it via the provided URL (e.g., http://localhost:7860 locally or a public URL on Colab).
+
+5. Run the Jupyter Notebook cells:
+ - Preprocess
+
+- Train model
+
+- Launch the Gradio Interface
+   
+
+### User Interface
+
+- The chatbot interface, built with Gradio, offers:
+
+- Simple layout with instructions
+
+- Example questions for easy start
+
+- Chat history tracking
+
+- Input box + Send & Clear buttons
 
 
-
-- Interact with the chatbot by typing questions or using example buttons.
-
-## Example Conversations
-
-Below is a sample interaction showcasing the chatbot’s functionality and current performance.
-
-- Example 1: In-Domain Question
-- User: "How to control pests on maize?"
-- Chatbot: "Use pesticides."
-- Analysis: The response is correct but generic.
 
 ## Challenges and Solutions
 
@@ -151,5 +170,22 @@ Future Work
 
 
 - Human Evaluation: Assess fluency and accuracy with farmer feedback.
+
+  
+## Repository Structure
+
+├── models/                                                                            # Saved trained models
+├── notebook/                                                                          # Jupyter training & evaluation notebook
+├── app.py                                                                             # Gradio app for chatbot
+├── requirements.txt                                                                   # Python dependencies
+├── README.md                                                                          # This file
+├── Report-Agricultural                                                                # Final PDF report
+
+
+## References
+
+1. Scientific Article on Deep Learning in Agriculture
+
+2. Adam vs AdamW Optimizer Discussion
 
 
