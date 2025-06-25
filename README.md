@@ -185,8 +185,9 @@ Future Work
 
 ## References
 
-1. Scientific Article on Deep Learning in Agriculture
+- [1]M. Aslam, M. A. Khan, S. A. Khan, S. Tariq, F. Alenezi, and Y. Nam, "Deep learning-based detection of maize crop diseases using remote sensing data," Pattern Recognition Letters, vol. 169, pp. 80–86, Jul. 2023. [Online]. Available: https://www.sciencedirect.com/science/article/abs/pii/S0167865523002210)
+  
+- [2]Y. Yassin, "Adam vs AdamW: Understanding weight decay and its impact on model performance," Medium, Aug. 31, 2023. [Online]. Available: https://yassin01.medium.com/adam-vs-adamw-understanding-weight-decay-and-its-impact-on-model-performance-b7414f0af8a1
 
-2. Adam vs AdamW Optimizer Discussion
 
 
