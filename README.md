@@ -74,7 +74,7 @@ Deployed via Hugging Face Spaces.
 
 A Walkthrough Video presentation.
 
- [Video](https://docs.google.com/document/d/1zxgSkirN0TaLzGcgyL4LFNXyzUNIetvXYgNzzPS9qlU/edit?usp=sharing)
+ [Video](https://youtu.be/dVDX5SsYBVs)
 
 
 ---
