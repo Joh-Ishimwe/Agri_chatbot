@@ -67,7 +67,7 @@ While the model achieved notable gains in validation accuracy, the low ROUGE-L a
 
 Deployed via Hugging Face Spaces.
 
- [Live Chatbot Demo](https://docs.google.com/document/d/1zxgSkirN0TaLzGcgyL4LFNXyzUNIetvXYgNzzPS9qlU/edit?usp=sharing)
+ [Live Chatbot Demo](https://huggingface.co/spaces/Joh2025/Agri_chatbot)
 
  
 ###  Video
